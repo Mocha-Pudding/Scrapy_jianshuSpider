@@ -10,12 +10,9 @@ class JsSpiderSpider(CrawlSpider):
     start_urls = ['https://www.jianshu.com/']
 
     rules = (
-        Rule(LinkExtractor(allow=r'Items/'), callback='parse_item', follow=True),
+        Rule(LinkExtractor(allow=r'.*/p/[0-9a-z]{12}.*'), callback='parse_detail', follow=True)
+        # 通过对url分析，文章id是由0-9数字和a-z小写字母组成。正则表达式里面.*表示可有可无
     )
 
-    def parse_item(self, response):
-        i = {}
-        #i['domain_id'] = response.xpath('//input[@id="sid"]/@value').extract()
-        #i['name'] = response.xpath('//div[@id="name"]').extract()
-        #i['description'] = response.xpath('//div[@id="description"]').extract()
-        return i
+    def parse_detail(self, response):
+        pass

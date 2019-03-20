@@ -8,7 +8,11 @@
 import scrapy
 
 
-class ScrapyJianshuspiderItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
+class ArticleItem(scrapy.Item):
+    title = scrapy.Field()
+    content = scrapy.Field()
+    article_id = scrapy.Field()
+    origin_url = scrapy.Field()
+    author = scrapy.Field()
+    avatar = scrapy.Field()
+    pub_time =scrapy.Field()
