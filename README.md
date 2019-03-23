@@ -1,13 +1,19 @@
 # Scrapy_jianshuSpider
 【Scrapy框架实战】简书网整站爬虫</br>
 </br>
-功能点如下(持续补充)↓：</br>
+功能点如下↓：</br>
 1.使用Scrapy框架</br>
-2.使用Crawl Spider爬虫对相同规则结构url进行爬取
+2.使用Crawl Spider爬虫对相同规则结构url进行爬取</br>
 3.将爬取下来的数据保存到MySQL数据库中</br>
 4.改进数据保存方式，采用twisted异步保存到MySQL</br>
 5.自定义DownloadMiddleware下载器中间件，将Selenium + Chromedriver集成到Scrapy中模拟浏览器行为爬取动态网页</br>
 6.实现整站爬取</br>
+</br>
+后期待扩展的功能：</br>
+1.使用随机请求头中间件</br>
+2.使用ip代理池中间件来解决反爬虫问题</br>
+3. ...
+</br>
 </br>
 </br>
 项目主要截图↓：</br>
