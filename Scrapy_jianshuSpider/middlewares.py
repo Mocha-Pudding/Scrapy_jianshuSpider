@@ -17,8 +17,16 @@ class SeleniumDownloadMiddleware(object):
     def process_request(self,request,spider):
         self.driver.get(request.url)
         time.sleep(1)
-
+        try:
+            while True:
+                showMore = self.driver.find_element_by_class_name("show-more")
+                showMore.click()
+                time.sleep(0.3)
+                if not showMore:
+                    break
+        except:
+            pass
         source = self.driver.page_source
         # 把网页源代码source封装成response对象，再返回给爬虫
-        response = HtmlResponse(url=self.driver.current_url,body=source,request=request)
+        response = HtmlResponse(url=self.driver.current_url,body=source,request=request,encoding='utf-8')
         return response

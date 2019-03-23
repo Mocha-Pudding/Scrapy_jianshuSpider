@@ -31,6 +31,23 @@ class JsSpiderSpider(CrawlSpider):
         # 文章内容，包括所有的html标签，而不是纯文本信息
         content = response.xpath("//div[@class='show-content-free']").get()
 
+        words_count = response.xpath("//span[@class='wordage']/text()").get()
+        comment_count = response.xpath("//span[@class='comments-count']/text()").get()
+        like_count = response.xpath("//span[@class='likes-count']/text()").get()
+        read_count = response.xpath("//span[@class='views-count']/text()").get()
+
+        # '字数 1657'、'评论 38'、'喜欢 244'、'阅读 8292' 需要用空格符分隔开
+        words_count = words_count.split(" ")[-1]
+        comment_count = comment_count.split(" ")[-1]
+        like_count = like_count.split(" ")[-1]
+        read_count = read_count.split(" ")[-1]
+
+        # subjects = response.xpath("//div[@class='include-collection']/a/div/text()").getall()
+        # subjects所有的主题返回的是一个列表，需要把列表转换成字符串（MySQL数据库中不支持列表）
+        # 让返回来的列表变成字符串，以逗号分开
+        subjects = ",".join(response.xpath("//div[@class='include-collection']/a/div/text()").getall())
+
+
         item = ArticleItem(
             title = title,
             content = content,
@@ -38,7 +55,12 @@ class JsSpiderSpider(CrawlSpider):
             author = author,
             pub_time = pub_time,
             origin_url = origin_url,
-            article_id = article_id
+            article_id = article_id,
+            words_count = words_count,
+            comment_count = comment_count,
+            like_count = like_count,
+            read_count = read_count,
+            subjects = subjects
         )
         yield item
 
